@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hanchai.assetcheck.fragment.QR_code">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scan_qrcode"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context="com.hanchai.qrbarcodescannerdemo.MainActivity">
+        <me.dm7.barcodescanner.zxing.ZXingScannerView
+            android:id="@+id/zxscan"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            />
+        <TextView
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:text="อาคาร : สิรินธร"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:text="ห้อง : SD-514"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+</FrameLayout>

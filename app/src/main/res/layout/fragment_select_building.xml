@@ -1,0 +1,100 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hanchai.assetcheck.model.SelectBuilding">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/login_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_horizontal"
+                android:text="ตรวจสอบครุภัณฑ์"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+            <ImageView
+                android:layout_marginTop="6dp"
+                android:layout_width="220dp"
+                android:layout_height="215dp"
+                android:background="@drawable/wolf"
+                android:layout_gravity="center"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buliding"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/textBuilding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="อาคาร :"
+                        android:textColor="#0d0c0c"
+                        android:textSize="18dp"
+                        />
+                <Spinner
+                    android:id="@+id/spinner_building"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/textBuilding"
+                    ></Spinner>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buliding"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/textRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ห้อง     :"
+                    android:textColor="#0d0c0c"
+                    android:textSize="18dp" />
+                <Spinner
+                    android:id="@+id/spinner_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/textRoom"
+                    ></Spinner>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+
+                <Button
+                    android:id="@+id/btn_check"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:text="ตรวจสอบ"
+                    />
+                <Button
+                    android:id="@+id/btn_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ประวัติ"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
