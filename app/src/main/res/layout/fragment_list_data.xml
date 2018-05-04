@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hanchai.assetcheck.fragment.ListData"
+    android:background="#ffff"
     >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ListData"/>
-    <!-- TODO: Update blank fragment layout -->
-    <!--<android.support.v7.widget.listRecyclerView-->
-        <!--android:id="@+id/rv_asset_item"-->
+    <!--<TextView-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="21dp"-->
-        <!--android:layout_weight="1" />-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="ListData"/>-->
+     TODO: Update blank fragment layout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_asset_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

@@ -47,6 +47,7 @@ public class Histroy extends Fragment {
 
             buildId = getArguments().getString(ARG_BUILDID);
             roomId = getArguments().getString(ARG_ROOMID);
+            //getArguments().getParcelableArrayList();
 
         }
         Log.d("buildId","::"+buildId+" roomId ::"+roomId);

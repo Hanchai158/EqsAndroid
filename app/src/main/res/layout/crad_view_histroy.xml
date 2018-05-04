@@ -60,7 +60,7 @@
                             android:id="@+id/item_code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Table/85235641K5J445ky5332i24"
+                            android:text="Table/85235641K5J445ky5"
                             android:textColor="#ffffff"
                             android:textSize="18dp" />
                     </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.hanchai.assetcheck.R;
 
 import com.hanchai.assetcheck.singlepage.Histroy_Item;
 import com.hanchai.assetcheck.service.HttpManager;
@@ -49,7 +50,7 @@ public class SelectBuilding extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_select_building, container, false);
+        final View view = inflater.inflate(R.layout.fragment_select_building, container, false);
 
         BuildingSpinner = view.findViewById(R.id.spinner_building);
         RoomSpinner = view.findViewById(R.id.spinner_room);
@@ -70,7 +71,7 @@ public class SelectBuilding extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 getRoomService(buildingId.get(position));
-                Toast.makeText(view.getContext(), "Select: "+ building.get(position),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "Select: "+ building.get(position),Toast.LENGTH_SHORT).show();
             }
 
             private void getRoomService(int buildingId) {
@@ -82,13 +83,23 @@ public class SelectBuilding extends Fragment {
                             List<RoomDetailDao> roomDao = response.body();
                             room.clear();
                             roomId.clear();
-                            for(RoomDetailDao ro : roomDao){
-                                room.add(ro.getRmId()+ro.getRmName());
-                                roomId.add(ro.getRmId());
-                                ArrayAdapter<String> adapterRoom = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, room);
-                                RoomSpinner.setAdapter(adapterRoom);
-                                Log.d("getRoomService :" ,"getRmId : "+ro.getRmId() +" getRmName :"+ro.getRmName());
+                            if(roomDao.size() != 0) {
+                                for (RoomDetailDao ro : roomDao) {
+                                    room.add(ro.getRmId() + ro.getRmName());
+                                    roomId.add(ro.getRmId());
+//                                    ArrayAdapter<String> adapterRoom = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, room);
+//                                    RoomSpinner.setAdapter(adapterRoom);
+                                    Log.d("getRoomService :", "getRmId : " + ro.getRmId() + " getRmName :" + ro.getRmName());
+                                }
+                                RoomSpinner.setEnabled(true);
+                            }else{
+                                room.add(getContext().getString(R.string.StartRoomSpinner));
+                                roomId.add("0");
+                                RoomSpinner.setEnabled(false);
+
                             }
+                            ArrayAdapter<String> adapterRoom = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, room);
+                            RoomSpinner.setAdapter(adapterRoom);
                             Log.d("getRoomService :" ,""+roomDao.size());
                         }
                     }
@@ -109,7 +120,7 @@ public class SelectBuilding extends Fragment {
         RoomSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(), "Select: "+ room.get(position),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "Select: "+ room.get(position),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -124,7 +135,13 @@ public class SelectBuilding extends Fragment {
                     @Override
                     public void onClick(View v) {
                         /*((MainActivity) getActivity()).ChangeFrament(new ListData(),"listdata");*/
-                        openActivity_List();
+                        if(BuildingSpinner.getSelectedItem().toString() != getContext().getString(R.string.StartBuildingSpinner)) {
+                            openActivity_List();
+                        }else{
+                            Toast.makeText(view.getContext(),getContext().getString(R.string.StartBuildingSpinner),Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
                 }
         );
@@ -134,7 +151,12 @@ public class SelectBuilding extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openActivity_Histroy();
+                        if(BuildingSpinner.getSelectedItem().toString() != getContext().getString(R.string.StartBuildingSpinner)) {
+                            openActivity_Histroy();
+                        }else{
+                            Toast.makeText(view.getContext(),getContext().getString(R.string.StartBuildingSpinner),Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
         );
@@ -143,6 +165,35 @@ public class SelectBuilding extends Fragment {
 
     public void openActivity_List(){
         Intent intent = new Intent(getContext(),ListAsset.class);
+        String Room = "";
+        String roomID = "";
+        String Building = "";
+        Integer buildId = -1;
+
+        if(RoomSpinner.getSelectedItem().toString() != null) {
+            Room = RoomSpinner.getSelectedItem().toString();
+            roomID = roomId.get(RoomSpinner.getSelectedItemPosition());
+        }else{
+            Room = "";
+            roomID = "";
+        }
+
+
+        if(BuildingSpinner.getSelectedItem().toString() != getContext().getString(R.string.StartBuildingSpinner)){
+            Building = BuildingSpinner.getSelectedItem().toString();
+            buildId = buildingId.get(BuildingSpinner.getSelectedItemPosition());
+        }else{
+            Building = "";
+            buildId = -1;
+
+        }
+        if(Room == "ไม่มีห้อง") {
+            Room = "-";
+        }
+        String Text = "อาคาร : " + Building + " ห้อง : " + Room;
+        intent.putExtra("BuildingName", Text);
+        intent.putExtra("BuildingID",buildId);
+        intent.putExtra("RoomID",roomID);
         startActivity(intent);
     }
 
@@ -162,7 +213,7 @@ public class SelectBuilding extends Fragment {
         }
 
 
-        if(BuildingSpinner.getSelectedItem().toString() != null){
+        if(BuildingSpinner.getSelectedItem().toString() != getContext().getString(R.string.StartBuildingSpinner)){
             Building = BuildingSpinner.getSelectedItem().toString();
             buildId = buildingId.get(BuildingSpinner.getSelectedItemPosition());
         }else{
@@ -171,7 +222,9 @@ public class SelectBuilding extends Fragment {
 
         }
 
-
+        if(Room == "ไม่มีห้อง") {
+            Room = "-";
+        }
         String Text = "อาคาร : " + Building + " ห้อง : " + Room;
         intent.putExtra("BuildingName", Text);
         intent.putExtra("BuildingID",buildId);
@@ -180,13 +233,13 @@ public class SelectBuilding extends Fragment {
     }
 
     private void CreateBuildingSpinnerData(){
-        building.add("กรุณาเลือก");
+        building.add(getContext().getString(R.string.StartBuildingSpinner));
         buildingId.add(-1);
     }
 
     private void CreateRoomSpinnerData(){
-        room.add("กรุณาเลือก");
-        roomId.add("-1");
+        room.add(getContext().getString(R.string.StartRoomSpinner));
+        roomId.add("0");
     }
 
     //service

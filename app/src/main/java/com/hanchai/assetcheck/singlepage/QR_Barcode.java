@@ -1,5 +1,6 @@
 package com.hanchai.assetcheck.singlepage;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,7 +20,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission.CAMERA;
 
 public class QR_Barcode extends AppCompatActivity implements ZXingScannerView.ResultHandler{
-
     private  static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
 
@@ -32,6 +32,7 @@ public class QR_Barcode extends AppCompatActivity implements ZXingScannerView.Re
 
         setContentView(R.layout.activity_qr__barcode);
         scannerView = findViewById(R.id.zxscan);
+
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(checkPermission()){
@@ -80,7 +81,8 @@ public class QR_Barcode extends AppCompatActivity implements ZXingScannerView.Re
     }
 
     public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
-        new AlertDialog.Builder(QR_Barcode.this)
+
+       new AlertDialog.Builder(QR_Barcode.this)
                 .setMessage(message)
                 .setPositiveButton("OK", (DialogInterface.OnClickListener) listener)
                 .setNegativeButton("Cancel",null)
@@ -115,24 +117,32 @@ public class QR_Barcode extends AppCompatActivity implements ZXingScannerView.Re
     @Override
     public void handleResult(com.google.zxing.Result result) {
         final String scanResult = result.getText();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                scannerView.resumeCameraPreview(QR_Barcode.this);
-            }
-        });
 
-        builder.setPositiveButton("Visit", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse(scanResult));
-                startActivity(intent);
-            }
-        });
-        builder.setMessage(scanResult);
-        AlertDialog alert = builder.create();
-        alert.show();
+        // put the String to pass back into an Intent and close this activity
+        Intent intent = new Intent();
+        intent.putExtra("Code", scanResult);
+        setResult(RESULT_OK, intent);
+        finish();
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Scan Result");
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                scannerView.resumeCameraPreview(QR_Barcode.this);
+//            }
+//        });
+//
+//        builder.setPositiveButton("Visit", new DialogInterface.OnClickListener(){
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse(scanResult));
+//                startActivity(intent);
+//            }
+//        });
+//        builder.setMessage(scanResult);
+//        AlertDialog alert = builder.create();
+//        alert.show();
     }
+
 }

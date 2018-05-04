@@ -6,22 +6,34 @@
     android:layout_height="match_parent"
     tools:context="com.hanchai.assetcheck.singlepage.ListAsset"
     >
-
+    <TextView
+        android:id="@+id/Asset_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:text="อาคาร : ... ห้อง : ..."
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
    <LinearLayout
+       android:layout_below="@+id/Asset_title"
        android:id="@+id/LLayout1"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_margin="10dp">
+       android:layout_margin="5dp">
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="รหัสครุภัณฑ์: "/>
        <EditText
-           android:layout_width="240dp"
+           android:id="@+id/Code_here"
+           android:layout_width="220dp"
            android:layout_height="wrap_content" />
 
        <Button
+           android:id="@+id/addbutton"
            android:layout_width="40dp"
            android:layout_height="40dp"
            android:text="+"

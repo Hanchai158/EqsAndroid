@@ -35,7 +35,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
-
+        ItemCollectionDao itemCollectionDao = asset.get(position);
+        holder.title_name.setText(itemCollectionDao.getEqsName());
+        holder.title_code.setText(itemCollectionDao.getEqsCodeOld());
+        holder.title_type.setText(itemCollectionDao.getFmstAbbr());
     }
 
     @Override
