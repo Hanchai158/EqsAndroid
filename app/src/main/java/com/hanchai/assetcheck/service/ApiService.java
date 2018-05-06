@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Hanchai on 21-Apr-18.
@@ -27,6 +28,6 @@ public interface ApiService {
     @POST("getRoom/{id}")
     Call<List<RoomDetailDao>> getRoom(@Path("id") int id);
 
-    @POST("update_Equipment/{Code}/{idBu}/{idRo}")
-    Call<Boolean> insertCode(@Part("Code") String Code, @Part("idBu") int idBu, @Part("idRo") int idRo);
+    @POST("update_Equipment")
+    Call<Boolean> insertCode(@Query("Code") String Code, @Query("idBu") int idBu, @Query("idRo") int idRo);
 }

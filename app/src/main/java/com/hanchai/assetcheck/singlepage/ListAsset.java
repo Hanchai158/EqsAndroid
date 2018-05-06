@@ -111,6 +111,7 @@ public class ListAsset extends AppCompatActivity {
                                 });
                         //Log.d("CodeActivity",":: "+Code.getCode());
                     }
+                    finish();
                 }
 
                 //    Call<List<ItemCollectionDao>> call = HttpManager.getInstance("http://10.80.39.17/TSP58/nursing/index.php/eqs/service_mobile/AndroidApi/").getService().getItemList(buID,romId);
